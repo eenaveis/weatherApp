@@ -51,16 +51,14 @@ function updateWeather(data) {
     let city = document.getElementById("city");
     let date = document.getElementById("date");
     let temp = document.getElementById("temp");
-    let icon = document.getElementById("condition-icon");
     let condition = document.getElementById("condition");
     // Condition icon url
     const conditionIconUrl = getWeatherCondition(data[0]["icon"]);
 
     // DOM operations
-    city.innerHTML = data[0]["city"];
+    city.innerHTML = `${data[0]["city"]}<img id="condition-icon" src="${conditionIconUrl}">`;
     date.innerHTML = `as of ${time[0].hours}:${time[0].minutes}`
-    temp.innerHTML = data[0]["temp"];
-    icon.src = conditionIconUrl;
+    temp.innerHTML = `${data[0]["temp"]}&#8451;`
     condition.innerHTML = data[0]["condition"];
     
 }

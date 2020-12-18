@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: rgb(245, 121, 121);
+    background-image: radial-gradient(#808080, #ec1313);
 }
 
 #header {
@@ -13,10 +13,12 @@ body {
 
 #main-data {
     border-radius: 10px;
-    background-color: rgb(240, 59, 59);
+    background-color: rgba(240, 59, 59, 0.5);
     width: 50%;
-    margin: 10px auto;
+    height: 400px;
+    margin: 50px auto;
     padding: 10px;
+    text-align: center;
 }
 
 #search-bar {
@@ -26,4 +28,17 @@ body {
     color: gray;
     font-size: 45px;
     text-align: center;
+}
+
+#temp {
+    font-size: 75px;
+}
+
+#condition {
+    font-size: 35px;
+}
+
+#condition-icon {
+    position: relative;
+    top: 45px;
 }
