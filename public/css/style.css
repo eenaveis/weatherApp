@@ -1,0 +1,110 @@
+/*
+Search icon made by: https://www.flaticon.com/authors/good-ware
+*/
+
+
+/* 
+---------------------------------------------------------------------
+GLOBAL STYLES
+*/
+* {
+    font-family: "Chakra Petch", sans-serif;
+    color: #F89652;
+}
+
+body {
+    background-image: radial-gradient(#F89652, #D94856);
+    margin: 0 0 0 0;
+}
+
+/* 
+---------------------------------------------------------------------
+HEADER STYLES
+*/
+#header {
+    background-color: #D94856;
+    height: 100px;
+}
+
+#header h1 {
+    color: #F89652;
+}
+
+#main-title {
+    float: left;
+    position: absolute;
+    top: 10px;
+    padding-left: 10px;
+}
+
+#search-form {
+    top: 25px;
+    position: absolute;
+    left: 37.5%;
+}
+
+#search-bar {
+    border-radius: 30px;
+    width: 300px;
+    height: 50px;
+    color: gray;
+    font-size: 45px;
+    text-align: center;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: url("../img/magnifying-glass.png");
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+    font-family: Helvetica, sans-serif;
+}
+
+/* 
+---------------------------------------------------------------------
+MAIN CONTENT STYLES
+*/
+#main-content {
+    margin: 100px;
+}
+
+.container{
+    border-radius: 10px;
+    background-color: rgba(217, 72, 86, 0.4);
+    width: 50%;
+    height: 250px;
+    padding: 10px;
+    text-align: center;
+    margin: 50px auto;
+    box-shadow: 1px 1px 10px rgba(217, 72, 86, 0.4);
+
+}
+
+.align-left {
+    display: inline-block;
+    text-align: left;
+}
+
+/* 
+---------------------------------------------------------------------
+TEMPERATURE, CONDITION & ETC STYLES*/
+#temp {
+    font-size: 75px;
+}
+
+#condition {
+    font-size: 35px;
+}
+
+#condition-icon {
+    position: relative;
+    top: 40px;
+}
+
+#date, #city {
+    line-height: 0;
+}
+
+#city {
+    position: relative;
+    bottom: 80px;
+    height: 20px;
+}
