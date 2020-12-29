@@ -1,11 +1,13 @@
 /*
-Search icon made by: https://www.flaticon.com/authors/good-ware
-*/
+Search icon made by: https://www.flaticon.com/authors/good-ware*/
 
+/*
+
+*/
 
 /* 
 ---------------------------------------------------------------------
-GLOBAL STYLES
+1. GLOBAL STYLES
 */
 * {
     font-family: "Chakra Petch", sans-serif;
@@ -19,7 +21,7 @@ body {
 
 /* 
 ---------------------------------------------------------------------
-HEADER STYLES
+2. HEADER STYLES
 */
 #header {
     background-color: #D94856;
@@ -60,7 +62,7 @@ HEADER STYLES
 
 /* 
 ---------------------------------------------------------------------
-MAIN CONTENT STYLES
+3. MAIN CONTENT STYLES
 */
 #main-content {
     margin: 100px;
@@ -83,9 +85,16 @@ MAIN CONTENT STYLES
     text-align: left;
 }
 
+#secondary-data {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* 
 ---------------------------------------------------------------------
-TEMPERATURE, CONDITION & ETC STYLES*/
+4. COMPONENT STYLES*/
 #temp {
     font-size: 75px;
 }
@@ -107,4 +116,24 @@ TEMPERATURE, CONDITION & ETC STYLES*/
     position: relative;
     bottom: 80px;
     height: 20px;
+}
+
+#secondary-data-table {
+    width: 300px;
+    border-collapse: collapse;
+    font-size: 25px;
+}
+
+#secondary-data-table td {
+    border-bottom: 1px solid #F89652;
+    text-align: left;
+}
+
+#feels-like {
+    font-size: 35px;
+}
+
+.weather-icon {
+    position: relative;
+    top: 2.5px;
 }

@@ -1,6 +1,12 @@
 /*
+Barometer icon made by https://www.flaticon.com/authors/freepik
+Humidity icon made by https://www.flaticon.com/authors/pixel-perfect
+Wind speed icon made https://www.flaticon.com/authors/photo3idea-studio
+*/
+
+/*
 --------------------------------------------------------------
-Weather operations
+Weather functions
 */
 
 // Update current weather for selected city
@@ -38,13 +44,9 @@ function parseApiResponse(response) {
     // Humidity %
         humidity: response["main"]["humidity"],
     //  Feels like
-        feels_like: response["main"]["feels:_like"],
+        feelsLike: response["main"]["feels_like"],
     // Wind speed
-        speed: response["wind"]["speed"],
-    // Sunrise
-
-    // Sunset
-
+        speed: response["wind"]["speed"]
     };
     return data;
 }
@@ -53,20 +55,74 @@ function parseApiResponse(response) {
 function updateWeather(data) {
     // Current time
     let time = getTime();
+    
     // Html elements
     let city = document.getElementById("city");
     let date = document.getElementById("date");
     let temp = document.getElementById("temp");
     let condition = document.getElementById("condition");
+    let feelsLike = document.getElementById("feels-like");
+    
     // Condition icon url
     const conditionIconUrl = getWeatherCondition(data.icon);
 
-    // DOM operations
+    // Update DOM
     city.innerHTML = `${data.city}<img id="condition-icon" src="${conditionIconUrl}">`;
     date.innerHTML = `as of ${time.hours}:${time.minutes}`
     temp.innerHTML = `${data.temp}&#8451;`
     condition.innerHTML = data.condition;
     
+    // Secondary data
+    feelsLike.innerHTML = `Feels like ${data.feelsLike}&#8451;`;
+    createWeatherTable(data.pressure, data.humidity, data.speed);
+}
+
+// Update secondary data table
+function createWeatherTable(pressure, humidity, windSpeed) {
+    // Table element
+    let table = document.getElementById("secondary-data-table");
+    
+    // Make sure the table is empty
+    while(table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
+    
+    // Create table rows
+    let row1 = document.createElement("tr");
+    let row2 = document.createElement("tr");
+    let row3 = document.createElement("tr");
+    
+    // Create table data
+    let airpressure = document.createElement("td");
+    let humid = document.createElement("td");
+    let speed = document.createElement("td");
+    
+    airpressure.innerHTML = "<img class='weather-icon' src='../img/gauge.png'> Air pressure";
+    humid.innerHTML = "<img class='weather-icon' src='../img/humidity.png'> Humidity";
+    speed.innerHTML = "<img class='weather-icon' src='../img/anemometer.png'> Wind speed";
+
+    let airpressureData = document.createElement("td");
+    let humidData = document.createElement("td");
+    let speedData = document.createElement("td");
+    
+    airpressureData.innerHTML = `${pressure} hPa`;
+    humidData.innerHTML = `${humidity} %`;
+    speedData.innerHTML = `${windSpeed} m/s`;
+    
+    // Append cells to rows
+    row1.appendChild(airpressure);
+    row1.appendChild(airpressureData);
+
+    row2.appendChild(humid);
+    row2.appendChild(humidData);
+
+    row3.appendChild(speed);
+    row3.appendChild(speedData);
+    
+    // Append rows to table
+    table.appendChild(row1);
+    table.appendChild(row2);
+    table.appendChild(row3);
 }
 
 // Returns weather condition icon URL
@@ -78,8 +134,7 @@ function getWeatherCondition(code) {
 
 /*
 --------------------------------------------------------------
-Time operations
-*/
+Time functions*/
 
 // Get current time
 function getTime() {
@@ -90,12 +145,11 @@ function getTime() {
     hours = updateTime(hours);
     minutes = updateTime(minutes);
 
-
     let result = {
         hours: hours,
         minutes: minutes
     };
-
+    
     return result;
 }
 
@@ -110,8 +164,7 @@ function updateTime(x) {
 
 /*
 --------------------------------------------------------------
-Map operations
-*/
+Map functions*/
 
 // Get city map and render to index page
 function getMap(city) {
@@ -136,8 +189,7 @@ function getMap(city) {
 
 /*
 --------------------------------------------------------------
-Form submit
-*/
+Form submit event*/
 
 // Handle search form submit event
 document.getElementById("search-form").addEventListener("submit", event => {
@@ -148,7 +200,7 @@ document.getElementById("search-form").addEventListener("submit", event => {
 
 /*
 --------------------------------------------------------------
-*/
+Call getWeather and getMap*/
 
 getWeather("Helsinki");
 getMap("Helsinki");
