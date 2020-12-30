@@ -97,9 +97,9 @@ function createWeatherTable(pressure, humidity, windSpeed) {
     let humid = document.createElement("td");
     let speed = document.createElement("td");
     
-    airpressure.innerHTML = "<img class='weather-icon' src='../img/gauge.png'> Air pressure";
-    humid.innerHTML = "<img class='weather-icon' src='../img/humidity.png'> Humidity";
-    speed.innerHTML = "<img class='weather-icon' src='../img/anemometer.png'> Wind speed";
+    airpressure.innerHTML = "<img class='weather-icon' src='../img/gauge.svg'> Air pressure";
+    humid.innerHTML = "<img class='weather-icon' src='../img/humidity.svg'> Humidity";
+    speed.innerHTML = "<img class='weather-icon' src='../img/anemometer.svg'> Wind speed";
 
     let airpressureData = document.createElement("td");
     let humidData = document.createElement("td");

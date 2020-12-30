@@ -136,6 +136,8 @@ body {
 .weather-icon {
     position: relative;
     top: 2.5px;
+    width: 24px;
+    height: 24px;
 }
 
 /*
