@@ -6,7 +6,7 @@ const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 const fs = require("fs");
 const request = require("request");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 app.use(express.static("public"));
 
