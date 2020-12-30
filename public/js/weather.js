@@ -69,11 +69,11 @@ function updateWeather(data) {
     // Update DOM
     city.innerHTML = `${data.city}<img id="condition-icon" src="${conditionIconUrl}">`;
     date.innerHTML = `as of ${time.hours}:${time.minutes}`
-    temp.innerHTML = `${data.temp}&#8451;`
+    temp.innerHTML = `${data.temp.toFixed(0)}&#8451;`
     condition.innerHTML = data.condition;
     
     // Secondary data
-    feelsLike.innerHTML = `Feels like ${data.feelsLike}&#8451;`;
+    feelsLike.innerHTML = `Feels like ${data.feelsLike.toFixed(0)}&#8451;`;
     createWeatherTable(data.pressure, data.humidity, data.speed);
 }
 
