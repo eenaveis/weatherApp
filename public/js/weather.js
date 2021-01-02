@@ -4,8 +4,7 @@ Humidity icon made by https://www.flaticon.com/authors/pixel-perfect
 Wind speed icon made https://www.flaticon.com/authors/photo3idea-studio
 */
 
-/*
---------------------------------------------------------------
+/*--------------------------------------------------------------
 Weather functions
 */
 
@@ -132,8 +131,7 @@ function getWeatherCondition(code) {
     return url;
 }
 
-/*
---------------------------------------------------------------
+/*--------------------------------------------------------------
 Time functions*/
 
 // Get current time
@@ -187,8 +185,7 @@ function getMap(city) {
     xhttp.send("city=" + city);
 }
 
-/*
---------------------------------------------------------------
+/*--------------------------------------------------------------
 Form submit event*/
 
 // Handle search form submit event
@@ -198,8 +195,7 @@ document.getElementById("search-form").addEventListener("submit", event => {
     getMap();
 })
 
-/*
---------------------------------------------------------------
+/*--------------------------------------------------------------
 Call getWeather and getMap*/
 
 getWeather("Helsinki");
