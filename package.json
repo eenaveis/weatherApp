@@ -14,7 +14,8 @@
     "chai-http": "^4.3.0",
     "jsdom": "^16.4.0",
     "live-server": "^1.2.1",
-    "mocha": "^8.2.1"
+    "mocha": "^8.2.1",
+    "nock": "^13.0.5"
   },
   "scripts": {
     "test": "mocha",
