@@ -45,3 +45,8 @@ app.post("/map", urlEncodedParser, (req, res) => {
 
 // Listen to the defined PORT
 app.listen(PORT);
+
+/*-----------------------------------------------------------
+Export app for testing*/
+
+module.exports = app;
