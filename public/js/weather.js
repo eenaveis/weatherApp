@@ -5,26 +5,82 @@ Wind speed icon made https://www.flaticon.com/authors/photo3idea-studio
 */
 
 /*--------------------------------------------------------------
+General functions*/
+
+// Make new http request
+function newHttpRequest(
+    requestType, url, requestHeader, data, responseType, handlerFunc) {
+    
+    const xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = () => {
+        if(xhttp.readyState == 4 && xhttp.status == 200) {
+            let response;
+            if(xhttp.responseType === "") {
+                response = xhttp.responseText;
+            } else {
+                response = xhttp.response;
+            }
+            handlerFunc(response);
+        }
+    }
+    xhttp.open(requestType, url, true);
+    xhttp.responseType = responseType;
+    xhttp.setRequestHeader(requestHeader.header, requestHeader.value);
+    xhttp.send(data);
+}
+
+// Get current time
+function getTime() {
+    let today = new Date();
+    let hours = today.getHours();
+    let minutes = today.getMinutes();
+
+    hours = updateTime(hours);
+    minutes = updateTime(minutes);
+
+    let result = {
+        hours: hours,
+        minutes: minutes
+    };
+    
+    return result;
+}
+
+// Helper function for getTime
+function updateTime(x) {
+    if (x < 10) {
+        return "0" + x;
+    } else {
+        return x;
+    }
+}
+
+/*--------------------------------------------------------------
 Weather functions
 */
+
+// Handle http response
+function getWeatherHandler(response) {
+    let data = JSON.parse(response);
+    let parsedData = parseApiResponse(data);
+    updateWeather(parsedData);
+}
 
 // Update current weather for selected city
 function getWeather(city) {
     if(city === undefined) {
         city = document.getElementById("search-bar").value;
     }
-    const xhttp = new XMLHttpRequest();
 
-    xhttp.onreadystatechange = () => {
-        if(xhttp.readyState == 4 && xhttp.status == 200) {
-            let data = JSON.parse(xhttp.responseText);
-            let parsedData = parseApiResponse(data);
-            updateWeather(parsedData);
-        }
-    }
-    xhttp.open("POST", "/weather", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("city=" + city);
+    const requestHeader = {
+        header: "Content-type", 
+        value: "application/x-www-form-urlencoded"
+    };
+
+    const data = "city=" + city;
+
+    newHttpRequest("POST", "/weather", requestHeader, data, "",  getWeatherHandler);
 }
 
 // Parse the weather API response
@@ -131,38 +187,16 @@ function getWeatherCondition(code) {
     return url;
 }
 
-/*--------------------------------------------------------------
-Time functions*/
-
-// Get current time
-function getTime() {
-    let today = new Date();
-    let hours = today.getHours();
-    let minutes = today.getMinutes();
-
-    hours = updateTime(hours);
-    minutes = updateTime(minutes);
-
-    let result = {
-        hours: hours,
-        minutes: minutes
-    };
-    
-    return result;
-}
-
-// Helper function for getTime
-function updateTime(x) {
-    if (x < 10) {
-        return "0" + x;
-    } else {
-        return x;
-    }
-}
-
 /*
 --------------------------------------------------------------
 Map functions*/
+
+// Handle http response
+function getMapHandler(response) {
+    let urlCreator = window.URL;
+    imageUrl = urlCreator.createObjectURL(response);    
+    document.getElementById("map-image").src = imageUrl;
+}
 
 // Get city map and render to index page
 function getMap(city) {
@@ -170,19 +204,14 @@ function getMap(city) {
         city = document.getElementById("search-bar").value;
     }
 
-    const xhttp = new XMLHttpRequest();
+    const requestHeader = {
+        header: "Content-type", 
+        value: "application/x-www-form-urlencoded"
+    };
 
-    xhttp.onreadystatechange = () => {
-        if(xhttp.readyState == 4 && xhttp.status == 200) {
-            let urlCreator = window.URL;
-            imageUrl = urlCreator.createObjectURL(xhttp.response);    
-            document.getElementById("map-image").src = imageUrl;
-        }
-    }
-    xhttp.open("POST", "/map", true);
-    xhttp.responseType = "blob";
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("city=" + city);
+    const data = "city=" + city;
+
+    newHttpRequest("POST", "/map", requestHeader, data, "blob",  getMapHandler);
 }
 
 /*--------------------------------------------------------------
@@ -211,5 +240,6 @@ console.log(wave, "Looking for a developer to hire? Contact me on LinkedIn: http
     parseApiResponse, 
     getWeatherCondition, 
     updateWeather,
-    createWeatherTable
+    createWeatherTable,
+    getWeather
 };*/

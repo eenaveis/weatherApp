@@ -6,7 +6,8 @@ import {updateTime,
   parseApiResponse, 
   getWeatherCondition,
   updateWeather,
-  createWeatherTable} from "../public/js/weather.js";
+  createWeatherTable,
+  getWeather} from "../public/js/weather.js";
 const assert = chai.assert;
 import {weatherApiResponse} from "./data/weather-api-response.js";
 import {weatherData} from "./data/weather-data.js";
@@ -40,6 +41,14 @@ describe("getTime", () => {
       const result = getTime();
       assert.equal(Object.keys(result).length, expected);
     });
+
+    it("Returns correct time", () => {
+      const clock = sinon.useFakeTimers(new Date(1995, 0, 1, 20, 20, 20));
+      const expected = {hours: 20, minutes: 20};
+      const result = getTime();
+      assert.deepEqual(result, expected);
+      clock.restore();
+    });
 });
 
 describe("parseApiResponse", () => {
@@ -66,7 +75,8 @@ describe("getWeatherCondition", () => {
 
 // Reset DOM objects
 function resetElements() {
-  const elements = ["city", "date", "temp", "condition", "feels-like", "secondary-data-table"];
+  const elements = [
+    "city", "date", "temp", "condition", "feels-like", "secondary-data-table"];
   elements.forEach(element => {
     document.getElementById(element).innerHTML = "";
   });  
@@ -146,4 +156,3 @@ describe("createWeatherTable", () => {
     assert.equal(result, expected);
   });
 });
-
