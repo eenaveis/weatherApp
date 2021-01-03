@@ -8,7 +8,35 @@
     <div id="mocha"></div>
 
     <!-- MOCK ELEMENTS -->
-    <div id="search-form"></div>
+    <div id="header">
+      <h1 id="main-title"></h1>
+      <form id="search-form">
+          <!--<input id="search-bar" type="text">-->
+      </form>
+  </div>
+  <div id="main-content">
+      <div id="main-data" class="container">
+          <div class="align-left">
+              <h2 id="city"></h2>
+              <h5 id="date"></h5>
+              <span id="temp"></span>
+              <br>
+              <span id="condition"></span>
+          </div>
+      </div>
+      <div id="map" class="container">
+          <img id="map-image">
+      </div>
+      <div id="secondary-data" class="container">
+          <span id="feels-like"></span>
+          <br>
+          <span id="sunrise"></span>
+          <span id="sunset"></span>
+          <table id="secondary-data-table"></table>
+      </div>
+  </div>
+  <!-- FOOTER -->
+  <footer></footer>
 
     <!-- LOAD MOCHA FILES -->
     <script src="../node_modules/mocha/mocha.js"></script>

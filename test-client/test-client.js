@@ -1,9 +1,15 @@
 /*-----------------------------------------------------------
 Module imports*/
 
-import {updateTime, getTime, parseApiResponse} from "../public/js/weather.js";
+import {updateTime, 
+  getTime, 
+  parseApiResponse, 
+  getWeatherCondition,
+  updateWeather,
+  createWeatherTable} from "../public/js/weather.js";
 const assert = chai.assert;
-import {weatherApiResponse} from "./weather-api-response.js";
+import {weatherApiResponse} from "./data/weather-api-response.js";
+import {weatherData} from "./data/weather-data.js";
 
 /*-----------------------------------------------------------
 Test cases*/
@@ -50,3 +56,94 @@ describe("parseApiResponse", () => {
       assert.equal(result, expected);
     });
 });
+
+describe("getWeatherCondition", () => {
+  it("Returns string", () => {
+    const result = getWeatherCondition("101");
+    assert.equal(typeof result, "string");
+  });
+});
+
+// Reset DOM objects
+function resetElements() {
+  const elements = ["city", "date", "temp", "condition", "feels-like", "secondary-data-table"];
+  elements.forEach(element => {
+    document.getElementById(element).innerHTML = "";
+  });  
+}
+
+describe("updateWeather", () => {
+  beforeEach(() => {
+    updateWeather(weatherData);
+  });
+
+  afterEach(() => {
+    resetElements();
+  });
+
+  it("Renders time", () => {
+    const expected = 2;
+    const result = document.getElementById("date")
+      .innerHTML
+      .split(" ")[2]
+      .split(":")
+      .length;
+    assert.equal(result, expected);
+  })
+  
+  it("Renders city", () => {
+    const expected = true;
+    const result = document.getElementById("city")
+      .innerHTML
+      .includes("Helsinki");
+    assert.equal(result, expected);
+  });
+
+  it("Renders temperature", () => {
+    const expected = true;
+    const result = document.getElementById("temp")
+      .innerHTML
+      .includes("-10");
+      assert.equal(result, expected);
+  });
+
+  it("Renders condition", () => {
+    const expected = true;
+    const result = document.getElementById("condition")
+      .innerHTML
+      .includes("breeze");
+    assert.equal(result, expected);
+  });
+
+  it("Renders feels like", () => {
+    const expected = true;
+    const result = document.getElementById("feels-like")
+      .innerHTML
+      .includes("-12");
+    assert.equal(result, expected);
+  });
+
+  it("Renders table with 3 rows", () => {
+    const expected = 3;
+    const result = document.getElementById("secondary-data-table").rows.length;
+    assert.equal(result, expected);
+  });
+});
+
+describe("createWeatherTable", () => {
+
+  beforeEach(() => {
+    createWeatherTable(1000, 77, 7.8);
+  });
+
+  afterEach(() => {
+    resetElements();
+  });
+
+  it("Renders table with 3 rows", () => {
+    const expected = 3;
+    const result = document.getElementById("secondary-data-table").rows.length;
+    assert.equal(result, expected);
+  });
+});
+

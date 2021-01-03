@@ -206,4 +206,10 @@ let wave = String.fromCodePoint(0x1F44B);
 console.log(wave, "Looking for a developer to hire? Contact me on LinkedIn: https://fi.linkedin.com/in/sievanen");
 
 // module export for testing
-//export {updateTime, getTime, parseApiResponse};
+/*export {updateTime, 
+    getTime, 
+    parseApiResponse, 
+    getWeatherCondition, 
+    updateWeather,
+    createWeatherTable
+};*/
